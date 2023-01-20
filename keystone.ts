@@ -11,5 +11,6 @@ export default withAuth(
     },
     lists,
     session,
+    ui: {},
   })
 );

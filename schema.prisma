@@ -38,6 +38,24 @@ model Tag {
   posts Post[] @relation("Post_tags")
 }
 
+model Task {
+  id           String    @id @default(cuid())
+  label        String    @default("")
+  priority     String?
+  isComplete   Boolean   @default(false)
+  assignedTo   Person?   @relation("Task_assignedTo", fields: [assignedToId], references: [id])
+  assignedToId String?   @map("assignedTo")
+  finishBy     DateTime?
+
+  @@index([assignedToId])
+}
+
+model Person {
+  id    String @id @default(cuid())
+  name  String @default("")
+  tasks Task[] @relation("Task_assignedTo")
+}
+
 model Blog {
   id          String  @id @default(cuid())
   title       String  @default("")

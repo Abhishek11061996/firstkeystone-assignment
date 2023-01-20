@@ -119,6 +119,30 @@ var lists = {
       posts: (0, import_fields2.relationship)({ ref: "Post.tags", many: true })
     }
   }),
+  Task: (0, import_core2.list)({
+    access: import_access2.allowAll,
+    fields: {
+      label: (0, import_fields2.text)({ validation: { isRequired: true } }),
+      priority: (0, import_fields2.select)({
+        type: "enum",
+        options: [
+          { label: "Low", value: "low" },
+          { label: "Medium", value: "medium" },
+          { label: "High", value: "high" }
+        ]
+      }),
+      isComplete: (0, import_fields2.checkbox)(),
+      assignedTo: (0, import_fields2.relationship)({ ref: "Person.tasks", many: false }),
+      finishBy: (0, import_fields2.timestamp)()
+    }
+  }),
+  Person: (0, import_core2.list)({
+    access: import_access2.allowAll,
+    fields: {
+      name: (0, import_fields2.text)({ validation: { isRequired: true } }),
+      tasks: (0, import_fields2.relationship)({ ref: "Task.assignedTo", many: true })
+    }
+  }),
   Blog
 };
 
@@ -153,7 +177,8 @@ var keystone_default = withAuth(
       url: "file:./keystone.db"
     },
     lists,
-    session
+    session,
+    ui: {}
   })
 );
 // Annotate the CommonJS export names for ESM import in node:
