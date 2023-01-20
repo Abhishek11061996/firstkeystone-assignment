@@ -11,6 +11,7 @@ export function CustomNavigation({ lists, authenticatedItem }: NavigationProps) 
       <ListNavItems lists={lists} />
       <NavItem href="https://keystonejs.com">Keystone Docs</NavItem>
       <NavItem href="https://youtube.com">Youtube</NavItem>
+      <NavItem href="/custom-page">Custom Page</NavItem>
     </NavigationContainer>
   );
 }
